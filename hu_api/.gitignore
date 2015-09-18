@@ -6,12 +6,9 @@
 
 # Ignore bundler config.
 /.bundle
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
+/coverage/*
 # Ignore all logfiles and tempfiles.
+/.idea/*
 /log/*
 !/log/.keep
-/tmp
+/tmp/*
