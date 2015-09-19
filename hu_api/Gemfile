@@ -7,6 +7,11 @@ gem 'puma'
 gem 'jbuilder'
 gem 'mysql2'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'thor'
+gem 'has_scope'
+gem 'kaminari'
+gem 'responders'
+gem 'activerecord-import'
 
 group :development, :test do
   gem 'factory_girl'
