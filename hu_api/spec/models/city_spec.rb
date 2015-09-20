@@ -13,5 +13,14 @@ RSpec.describe City, type: :model do
         expect(City.new).to be_invalid
       end
     end
+    context 'already created city' do
+      before :each do
+        FactoryGirl.create(:city, :a)
+      end
+      let(:invalid_city){FactoryGirl.build(:city, :a) }
+      it 'should be invalid' do
+        expect(invalid_city).to be_invalid
+      end
+    end
   end
 end

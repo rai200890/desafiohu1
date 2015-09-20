@@ -5,7 +5,7 @@ RSpec.describe Hotel, type: :model do
   describe 'Validations' do
     let(:city_a){FactoryGirl.create(:city, :a)}
     context 'hotel with a name and a city' do
-      let(:hotel_with_city){FactoryGirl.build(:hotel, :with_city)}
+      let(:hotel_with_city){FactoryGirl.build(:hotel)}
       it 'should be valid' do
         expect(hotel_with_city).to be_valid
       end
@@ -16,7 +16,7 @@ RSpec.describe Hotel, type: :model do
       end
     end
     context 'hotel without a city' do
-      let(:hotel_without_city){FactoryGirl.build(:hotel)}
+      let(:hotel_without_city){FactoryGirl.build(:hotel, :without_city)}
       it 'should be invalid' do
         expect(hotel_without_city).to be_invalid
       end

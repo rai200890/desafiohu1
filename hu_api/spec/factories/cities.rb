@@ -3,9 +3,6 @@ FactoryGirl.define do
     sequence :name do |n|
       "City#{n}"
     end
-    trait :with_city do
-      city
-    end
     trait :a do
       name "City A"
     end

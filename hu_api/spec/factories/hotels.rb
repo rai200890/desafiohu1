@@ -3,8 +3,9 @@ FactoryGirl.define do
     sequence :name do |n|
       "Hotel#{n}"
     end
-    trait :with_city do
-      city
+    city
+    trait :without_city do
+      city nil
     end
     trait :from_city_a do
       association :city, :a
