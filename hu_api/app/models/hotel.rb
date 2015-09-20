@@ -6,7 +6,8 @@ class Hotel < ActiveRecord::Base
   validates :name, presence: true, uniqueness: {scope: :city_id}
 
   scope :by_city_or_hotel, ->(name) do
-    joins(:city).where('cities.name LIKE ? OR hotels.name LIKE ?', "%#{name}%", "%#{name}%")
+    name = "%#{name}%".upcase
+    joins(:city).where('cities.name LIKE UPPER(?) OR hotels.name LIKE UPPER(?)',name,name)
   end
 
   scope :available_from, ->(start_date){ joins(:availabilities).where('availabilities.day >= ?', start_date)}
