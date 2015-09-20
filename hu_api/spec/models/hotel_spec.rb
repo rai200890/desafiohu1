@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Hotel, type: :model do
-
   describe 'Validations' do
     let(:city_a){FactoryGirl.create(:city, :a)}
     context 'hotel with a name and a city' do
@@ -113,29 +112,37 @@ RSpec.describe Hotel, type: :model do
       end
     end
     describe '.available_from' do
+      let(:hotel){FactoryGirl.create(:hotel)}
       context 'hotel with availability after the given start_date' do
+        before(:each) do
+          FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
+        end
         it 'should return that hotel' do
-          pending
+          expect(Hotel.available_from('10/05/2015')).to include(hotel)
         end
       end
       context 'hotel with no availability' do
-        before :each do
-          hotel
-        end
         it 'should return empty' do
-          expect(Hotel.available_from(Date.today)).to be_empty
+          expect(Hotel.available_from('10/05/2015')).to be_empty
         end
       end
-      context 'hotel with availability in the start_date' do
+      context 'hotel with availability at the start_date' do
+        before(:each) do
+          FactoryGirl.create(:availability, day: '10/05/2015' , hotel: hotel)
+        end
         it 'should return that hotel' do
-          pending
+          expect(Hotel.available_from('10/05/2015')).to include(hotel)
         end
       end
     end
     describe '.available_until' do
+      let(:hotel){FactoryGirl.create(:hotel)}
       context 'hotel with availability before the given end_date' do
+        before(:each) do
+          FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
+        end
         it 'should return that hotel' do
-          pending
+          expect(Hotel.available_from('08/05/2015')).to include(hotel)
         end
       end
       context 'hotel with no availability' do
@@ -143,13 +150,49 @@ RSpec.describe Hotel, type: :model do
           hotel
         end
         it 'should return empty' do
-          expect(Hotel.available_until(Date.tomorrow)).to be_empty
+          expect(Hotel.available_until('08/04/2O15')).to be_empty
+        end
+      end
+      context 'hotel with availability at the given end_date' do
+        before(:each) do
+          FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
+        end
+        it 'should return that hotel' do
+          expect(Hotel.available_from('09/05/2015')).to include(hotel)
         end
       end
     end
     describe '.available_from_until' do
-      it '' do
-
+      let(:hotel){FactoryGirl.create(:hotel)}
+      context 'hotel with availability all days between given start_date and end_date' do
+        before(:each) do
+          FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
+          FactoryGirl.create(:availability, day: '10/05/2015' , hotel: hotel)
+          FactoryGirl.create(:availability, day: '11/05/2015' , hotel: hotel)
+        end
+        it 'should return that hotel' do
+          expect(Hotel.available_from_until('09/05/2015','11/05/2015')).to include(hotel)
+        end
+      end
+      context 'hotel with availability some days between given start_date and end_date' do
+        before(:each) do
+          FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
+          FactoryGirl.create(:availability, day: '11/05/2015' , hotel: hotel)
+        end
+        it 'should return empty' do
+          expect(Hotel.available_from_until('09/05/2015','11/05/2015')).to be_empty
+        end
+      end
+    end
+    context 'hotel with availability more days between given start_date and end_date' do
+      before(:each) do
+        FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
+        FactoryGirl.create(:availability, day: '10/05/2015' , hotel: hotel)
+        FactoryGirl.create(:availability, day: '11/05/2015' , hotel: hotel)
+        FactoryGirl.create(:availability, day: '12/05/2015' , hotel: hotel)
+      end
+      it 'should return that hotel' do
+        expect(Hotel.available_from_until('09/05/2015','11/05/2015')).to include(hotel)
       end
     end
   end

@@ -27,7 +27,16 @@ RSpec.describe Availability, type: :model do
         expect(availability).to be_invalid
       end
     end
-
+    context 'with a day already associated with the same hotel' do
+      let(:hotel) { FactoryGirl.create(:hotel) }
+      let(:availability){FactoryGirl.build(:availability, day: '03/05/2015', hotel: hotel)}
+      before :each do
+        FactoryGirl.create(:availability, day: '03/05/2015', hotel: hotel)
+      end
+      it 'should be invalid' do
+        expect(availability).to be_invalid
+      end
+    end
   end
 
 end
