@@ -16,7 +16,9 @@
                 <div class="input-group-addon">
                   <i class="fa fa-map-marker"></i>
                 </div>
-                <input type="text" ng-model="location" placeholder="cidade ou hotel" typeahead="location for location in typeaheadLocation($viewValue)" class="form-control">
+                <input type="text" ng-model="location" placeholder="cidade ou hotel"
+                       typeahead="(location.name + ' , ' + location.city_name) for location in typeaheadLocation($viewValue)"
+                       typeahead-on-select="typeaheadSelected($item, $model, $label)" class="form-control">
               </div>
             </div>
           </div>
@@ -35,7 +37,8 @@
                         <div class="input-group-addon">
                           <a role="button" ng-click="openStartDate($event)"><i class="fa fa-calendar"></i></a>
                         </div>
-                        <input type="text" ng-disabled="undefinedDates" placeholder="entrada" class="form-control" datepicker-popup ng-model="startDate.date" is-open="startDate.opened" />
+                        <input type="text" ng-disabled="undefinedDates" placeholder="entrada" class="form-control" datepicker-popup
+                               ng-model="startDate.date" is-open="startDate.opened" />
                       </div>
                     </div>
                   </div>

@@ -12,7 +12,7 @@ angular.module('huHotelSearchApp')
 
     $scope.startDate = {};
     $scope.endDate = {};
-
+    $scope.location = null;
     $scope.undefinedDates = false;
 
     $scope.openStartDate = function($event) {
@@ -22,10 +22,14 @@ angular.module('huHotelSearchApp')
       $scope.endDate.opened = true;
     };
 
+    $scope.typeaheadSelected = function($item, $model, $label) {
+      $scope.hotelId = $item.id;
+    };
+
     $scope.typeaheadLocation = function(){
-      return Hotel.getHotels().then(function(response) {
+      return Hotel.getHotels($scope.location).then(function(response) {
         return response.data.map(function (item) {
-          return item.name;
+          return item;
         });
       });
     };
