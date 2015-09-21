@@ -7,10 +7,15 @@
  * # MainCtrl
  * Controller of the interfaceApp
  */
-angular.module('interfaceApp')
-  .controller('MainCtrl', function () {
+angular.module('huHotelSearchApp')
+  .controller('MainCtrl', function ($scope) {
+    $scope.startDate = {};
+    $scope.endDate = {};
 
-
-
-
-    });
+    $scope.openStartDate = function($event) {
+      $scope.startDate.opened = true;
+    };
+    $scope.openEndDate = function($event) {
+      $scope.endDate.opened = true;
+    };
+  });

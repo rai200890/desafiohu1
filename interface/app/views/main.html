@@ -1,3 +1,74 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
+<div class="hotel-search-form">
+  <div class="hotel-search-form-title">
+    <p><i class="fa fa-hotel"></i>HOTÉIS</p>
+  </div>
+  <div class="hotel-search-form-body container">
+    <div class="row">
+      <h2>+ 170.000 hotéis, pousadas e resorts no mundo todo. </h2>
+    </div>
+    <div class="row">
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Quer ficar onde?</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                <i class="fa fa-map-marker"></i>
+                </div>
+                <input type="text" class="form-control" ng-model="location" id="location" placeholder="cidade ou hotel">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-12">
+                <label>Quando? (Entrada e Saída)</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <a role="button" ng-click="openStartDate($event)"><i class="fa fa-calendar"></i></a>
+                        </div>
+                        <input type="text" placeholder="entrada" class="form-control" datepicker-popup ng-model="startDate.date" is-open="startDate.opened" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <a role="button" ng-click="openEndDate($event)"><i class="fa fa-calendar"></i></a>
+                        </div>
+                        <input type="text" placeholder="saída" class="form-control" datepicker-popup ng-model="endDate.date" is-open="endDate.opened" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox">Ainda não defini as datas
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-lg btn-warning"><i class="fa fa-search"></i>Buscar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
