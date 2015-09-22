@@ -5,7 +5,7 @@ class Hotel < ActiveRecord::Base
   validates :city_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :city_id}
 
-  scope :by_city_or_hotel, ->(name) do
+  scope :by_city_or_hotel_name, ->(name) do
     name = "%#{name}%".upcase
     joins(:city).where('cities.name LIKE UPPER(?) OR hotels.name LIKE UPPER(?)',name,name)
   end

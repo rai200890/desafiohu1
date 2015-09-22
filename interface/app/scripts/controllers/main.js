@@ -8,11 +8,13 @@
  * Controller of the interfaceApp
  */
 angular.module('huHotelSearchApp')
-  .controller('MainCtrl', function ($scope, Hotel) {
+  .controller('MainCtrl', function ($scope, Hotel, City) {
 
     $scope.startDate = {};
     $scope.endDate = {};
+
     $scope.location = null;
+
     $scope.undefinedDates = false;
 
     $scope.openStartDate = function($event) {
@@ -23,13 +25,24 @@ angular.module('huHotelSearchApp')
     };
 
     $scope.typeaheadSelected = function($item, $model, $label) {
-      $scope.hotelId = $item.id;
+      console.log($item.type);
+      $scope.id = $item.object.id;
     };
 
     $scope.typeaheadLocation = function(){
-      return Hotel.getHotels($scope.location).then(function(response) {
-        return response.data.map(function (item) {
-          return item;
+      return Hotel.getHotels($scope.location).then(function(hotels) {
+
+        return hotels.data.map(function(hotel) {
+          return {type: 'hotel', object: {id: hotel.id, name: (hotel.name + ',' + hotel.city_name)}}
+        });
+
+      }).then(function(hotels){
+        return City.getCities($scope.location).then(function(cities){
+
+          return cities.data.map(function(city) {
+            return {type: 'city', object: {id: city.id, name: city.name}}
+          }).concat(hotels);
+
         });
       });
     };
