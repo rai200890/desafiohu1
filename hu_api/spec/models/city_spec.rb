@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe City, type: :model do
-  describe 'Validations' do
+  describe 'validations' do
     context 'city with a name' do
       let(:city){FactoryGirl.build(:city)}
       it 'should be valid' do
@@ -22,5 +22,8 @@ RSpec.describe City, type: :model do
         expect(invalid_city).to be_invalid
       end
     end
+  end
+  describe 'scopes' do
+
   end
 end
