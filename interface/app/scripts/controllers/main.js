@@ -9,9 +9,9 @@
  */
 angular.module('huHotelSearchApp')
   .controller('MainCtrl', function ($scope, Hotel, City) {
-
     $scope.searchParams = {startDate: {}, endDate: {},  undefinedDates: false};
     $scope.paginator = {currentPage: 1, maxSize: 2, numPages: 10, totalItems: 20};
+    $scope.hotels = [];
     $scope.location = null;
 
     $scope.openStartDate = function($event) {
@@ -23,6 +23,19 @@ angular.module('huHotelSearchApp')
 
     $scope.typeaheadSelected = function($item, $model, $label) {
       $scope.searchParams.id = $item.object.id;
+    };
+
+    $scope.search = function(){
+      var start_date = $scope.searchParams.startDate.date.toLocaleDateString();
+      var end_date = $scope.searchParams.endDate.date.toLocaleDateString();
+      var params = {
+        id: $scope.searchParams.id,
+        start_date: start_date,
+        end_date: end_date
+      };
+      Hotel.getHotelsByParams(params).success(function(response){
+        $scope.hotels = response;
+      });
     };
 
     $scope.typeaheadLocation = function(){

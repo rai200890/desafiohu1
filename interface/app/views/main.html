@@ -68,19 +68,29 @@
         </div>
         <div class="row">
           <div class="col-xs-12 col-md-12">
-            <button class="btn btn-lg btn-warning"><i class="fa fa-search "></i><span>BUSCAR</span></button>
+            <button ng-click="search()" class="btn btn-lg btn-warning"><i class="fa fa-search "></i><span>BUSCAR</span></button>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="col-xs-12 col-md-12 text-center">
-      <pagination total-items="paginator.totalItems" ng-model="paginator.currentPage" max-size="paginator.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="paginator.numPages">
-      </pagination>
-      <h5 class="text-center">Página: {{paginator.currentPage}} / {{paginator.numPages}}</h5>
-    </div>
+<div class="row-fluid">
+  <div class="col-xs-12 col-md-12 text-center">
+    <table class="table table-bordered">
+      <thead>
+      <th>Hotel</th>
+      <th>Cidade</th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="item in hotels">
+        <td>{{item.name}}</td>
+        <td>{{item.city_name}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination total-items="paginator.totalItems" ng-model="paginator.currentPage" max-size="paginator.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="paginator.numPages">
+    </pagination>
+    <h5 class="text-center">Página: {{paginator.currentPage}} / {{paginator.numPages}}</h5>
   </div>
 </div>
