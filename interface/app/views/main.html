@@ -37,8 +37,8 @@
                         <div class="input-group-addon">
                           <a role="button" ng-click="openStartDate($event)"><i class="fa fa-calendar"></i></a>
                         </div>
-                        <input type="text" ng-disabled="undefinedDates" placeholder="entrada" class="form-control" datepicker-popup
-                               ng-model="startDate.date" is-open="startDate.opened" />
+                        <input type="text" ng-disabled="searchParams.undefinedDates" placeholder="entrada" class="form-control" datepicker-popup
+                               ng-model="searchParams.startDate.date" is-open="searchParams.startDate.opened" />
                       </div>
                     </div>
                   </div>
@@ -48,7 +48,7 @@
                         <div class="input-group-addon">
                           <a role="button" ng-click="openEndDate($event)"><i class="fa fa-calendar"></i></a>
                         </div>
-                        <input type="text" ng-disabled="undefinedDates" placeholder="saída" class="form-control" datepicker-popup ng-model="endDate.date" is-open="endDate.opened" />
+                        <input type="text" ng-disabled="searchParams.undefinedDates" placeholder="saída" class="form-control" datepicker-popup ng-model="searchParams.endDate.date" is-open="searchParams.endDate.opened" />
                       </div>
                     </div>
                   </div>
@@ -58,7 +58,7 @@
                 <div class="col-xs-12 col-md-12">
                   <div class="checkbox">
                     <label>
-                      <input ng-model="undefinedDates" type="checkbox">Ainda não defini as datas
+                      <input ng-model="searchParams.undefinedDates" type="checkbox">Ainda não defini as datas
                     </label>
                   </div>
                 </div>
@@ -72,6 +72,15 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-xs-12 col-md-12 text-center">
+      <pagination total-items="paginator.totalItems" ng-model="paginator.currentPage" max-size="paginator.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="paginator.numPages">
+      </pagination>
+      <h5 class="text-center">Página: {{paginator.currentPage}} / {{paginator.numPages}}</h5>
     </div>
   </div>
 </div>
