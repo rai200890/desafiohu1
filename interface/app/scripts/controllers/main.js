@@ -8,10 +8,10 @@
  * Controller of the interfaceApp
  */
 angular.module('huHotelSearchApp')
-  .controller('MainCtrl', function ($scope, Hotel, City) {
+  .controller('MainCtrl', function ($scope, Hotel, Location) {
     $scope.searchParams = {startDate: {}, endDate: {},  undefinedDates: false};
     $scope.paginator = {currentPage: 1, maxSize: 2, numPages: 10, totalItems: 20};
-    $scope.hotels = [];
+    $scope.hotels = null;
     $scope.location = null;
 
     $scope.openStartDate = function($event) {
@@ -26,34 +26,23 @@ angular.module('huHotelSearchApp')
     };
 
     $scope.search = function(){
-      var start_date = $scope.searchParams.startDate.date.toLocaleDateString();
-      var end_date = $scope.searchParams.endDate.date.toLocaleDateString();
-      var params = {
-        id: $scope.searchParams.id,
-        start_date: start_date,
-        end_date: end_date
-      };
-      Hotel.getHotelsByParams(params).success(function(response){
-        $scope.hotels = response;
-      });
+      var params = {id: $scope.searchParams.id};
+      var start_date = $scope.searchParams.startDate.date;
+      var end_date = $scope.searchParams.endDate.date;
+
+      if (!$scope.undefinedDates){
+        params['start_date'] = start_date;
+        params['end_date'] = end_date;
+      }
+
+      Hotel.getHotelsByParams(params).
+        success(function(response){
+          $scope.hotels = response;
+        });
     };
 
     $scope.typeaheadLocation = function(){
-      return Hotel.getHotels($scope.location).then(function(hotels) {
-
-        return hotels.data.map(function(hotel) {
-          return {type: 'hotel', object: {id: hotel.id, name: (hotel.name + ',' + hotel.city_name)}}
-        });
-
-      }).then(function(hotels){
-        return City.getCities($scope.location).then(function(cities){
-
-          return cities.data.map(function(city) {
-            return {type: 'city', object: {id: city.id, name: city.name}}
-          }).concat(hotels);
-
-        });
-      });
+      return Location.typeahead($scope.location);
     };
 
   });
