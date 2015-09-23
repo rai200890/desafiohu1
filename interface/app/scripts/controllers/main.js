@@ -22,15 +22,23 @@ angular.module('huHotelSearchApp')
     };
 
     $scope.typeaheadSelected = function($item, $model, $label) {
-      $scope.searchParams.id = $item.object.id;
+      if ($item.type == 'hotel') {
+        $scope.searchParams.id = $item.object.id;
+      }
+      if ($item.type == 'city') {
+        $scope.searchParams.city_id = $item.object.id;
+      }
     };
 
     $scope.search = function(){
-      var params = {id: $scope.searchParams.id};
+      var params = {};
       var start_date = $scope.searchParams.startDate.date;
       var end_date = $scope.searchParams.endDate.date;
 
-      if (!$scope.undefinedDates){
+      params['id'] = $scope.searchParams.id;
+      params['city_id'] = $scope.searchParams.city_id;
+
+      if ($scope.searchParams.undefinedDates == false){
         params['start_date'] = start_date;
         params['end_date'] = end_date;
       }

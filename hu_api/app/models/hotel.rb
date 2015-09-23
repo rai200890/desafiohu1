@@ -10,7 +10,9 @@ class Hotel < ActiveRecord::Base
     joins(:city).where('cities.name LIKE UPPER(?) OR hotels.name LIKE UPPER(?)',name,name)
   end
 
-  scope :by_id_or_city_id, ->(id){ joins(:city).where('hotels.id = ? OR cities.id = ?', id, id) }
+  scope :by_id, ->(id){ eager_load(:city).where(id: id) }
+
+  scope :by_city_id, ->(city_id){ eager_load(:city).where(city_id: city_id) }
 
   scope :available_from, ->(start_date){ joins(:availabilities).where('availabilities.day >= ?', start_date)}
 
