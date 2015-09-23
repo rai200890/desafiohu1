@@ -28,7 +28,13 @@ module HuApi
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :options]
+        resource '*',
+                 headers: :any,
+                 expose: ['X-Pagination-Total-Pages',
+                          'X-Pagination-Total-Entries',
+                          'X-Pagination-Per-Page',
+                          'X-Pagination-Current-Page'],
+                 methods: [:get, :options]
       end
     end
     # Do not swallow errors in after_commit/after_rollback callbacks.

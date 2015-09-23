@@ -44,7 +44,8 @@ angular.module('huHotelSearchApp')
       }
 
       Hotel.getHotelsByParams(params).
-        success(function(response){
+        success(function(response, statusCode, headers){
+          console.log(headers());
           $scope.hotels = response;
         });
     };
