@@ -10,7 +10,7 @@
 angular.module('huHotelSearchApp')
   .controller('MainCtrl', function ($scope, Hotel, Location) {
     $scope.searchParams = {startDate: {}, endDate: {},  undefinedDates: false};
-    $scope.paginator = {currentPage: 1, perPage: 2, totalPages: 10, totalEntries: 20};
+    $scope.paginator = {currentPage: 1, perPage: 15};
     $scope.hotels = null;
     $scope.location = null;
 
@@ -42,6 +42,8 @@ angular.module('huHotelSearchApp')
         params['start_date'] = start_date;
         params['end_date'] = end_date;
       }
+      params['per'] = $scope.paginator.perPage;
+      params['page'] = $scope.paginator.currentPage;
 
       Hotel.getHotelsByParams(params).
         success(function(response, statusCode, headers){

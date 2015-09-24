@@ -7,7 +7,7 @@ module Api
 
     def index
       @cities = apply_scopes(City)
-      define_pagination_headers(@cities)
+      define_pagination_headers(City)
       respond_with(@cities)
     end
 

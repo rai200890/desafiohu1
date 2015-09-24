@@ -25,6 +25,14 @@ angular.
         url += '&available_from_until[start_date]='+ params.start_date;
         url += '&available_from_until[end_date]='+ params.end_date;
       }
+      if (params.page) {
+        url += '&page=' + params.page;
+      }
+
+      if (params.per) {
+        url += '&per=' + params.per;
+      }
+
       return $http({
         method: "GET",
         url: url });

@@ -10,7 +10,7 @@ module Api
 
     def index
       @hotels = apply_scopes(Hotel)
-      define_pagination_headers(@hotels)
+      define_pagination_headers(Hotel)
       respond_with(@hotels)
     end
 
