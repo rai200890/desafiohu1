@@ -18,7 +18,8 @@
                     <div class="input-group-addon">
                       <i class="fa fa-map-marker"></i>
                     </div>
-                    <input type="text" ng-model="location" placeholder="cidade ou hotel"
+                    <input type="text" ng-model="location" placeholder="cidade ou hotel" typeahead-wait-ms="1000"
+                           typeahead-no-results="typeaheadNoResults"
                            typeahead="location.object.name for location in typeaheadLocation($viewValue)"
                            typeahead-on-select="typeaheadSelected($item, $model, $label)" class="form-control">
                   </div>
@@ -119,9 +120,12 @@
           </div>
         </div>
       </div>
-      <div class="row-fluid">
-        <h3 ng-if="hotels.length == 0" class="text-center text-info">Nenhum hotel foi encontrado com esses critérios</h3>
-      </div>
     </div>
   </div>
 </div>
+<div class="row-fluid">
+  <div class="col-xs-12 col-md-12">
+    <h3 ng-if="hotels && hotels.length == 0" class="text-center text-info">Nenhum hotel foi encontrado com esses critérios</h3>
+  </div>
+</div>
+

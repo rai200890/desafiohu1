@@ -13,6 +13,7 @@ angular.module('huHotelSearchApp')
     $scope.paginator = {currentPage: 1, perPage: 15};
     $scope.hotels = null;
     $scope.location = null;
+    $scope.typeaheadNoResults = false;
 
     $scope.openStartDate = function($event) {
       $scope.searchParams.startDate.opened = true;
@@ -35,10 +36,19 @@ angular.module('huHotelSearchApp')
       var start_date = $scope.searchParams.startDate.date;
       var end_date = $scope.searchParams.endDate.date;
 
-      params['id'] = $scope.searchParams.id;
-      params['city_id'] = $scope.searchParams.city_id;
+      if ($scope.searchParams.id && !$scope.typeaheadNoResults){
+        params['id'] = $scope.searchParams.id;
+      }
 
-      if ($scope.searchParams.undefinedDates == false){
+      if ($scope.searchParams.city_id && !$scope.typeaheadNoResults){
+        params['city_id'] = $scope.searchParams.city_id;
+      }
+
+      if(!$scope.searchParams.city_id && !$scope.searchParams.id){
+        params['name'] = $scope.location;
+      }
+
+      if (!$scope.searchParams.undefinedDates){
         params['start_date'] = start_date;
         params['end_date'] = end_date;
       }
@@ -55,6 +65,7 @@ angular.module('huHotelSearchApp')
             totalEntries: headers['x-pagination-total-entries'],
             totalPages: headers['x-pagination-total-pages']
           };
+
           $scope.hotels = response;
         });
     };

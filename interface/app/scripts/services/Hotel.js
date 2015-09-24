@@ -20,7 +20,9 @@ angular.
       if (params.city_id) {
         url += 'by_city_id=' + params.city_id;
       }
-
+      if (params.name){
+        url += 'by_city_or_hotel_name=' + params.name;
+      }
       if (params.start_date && params.end_date){
         url += '&available_from_until[start_date]='+ params.start_date;
         url += '&available_from_until[end_date]='+ params.end_date;
