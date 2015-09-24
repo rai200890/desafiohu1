@@ -49,8 +49,8 @@ angular.module('huHotelSearchApp')
       }
 
       if (!$scope.searchParams.undefinedDates){
-        params['start_date'] = start_date;
-        params['end_date'] = end_date;
+        params['start_date'] = start_date.toLocaleDateString();
+        params['end_date'] = end_date.toLocaleDateString();
       }
       params['per'] = $scope.paginator.perPage;
       params['page'] = $scope.paginator.currentPage;

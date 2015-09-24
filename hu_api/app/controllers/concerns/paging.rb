@@ -20,9 +20,11 @@ module Paging
     scopes = current_scopes
     scopes.delete(:per)
     scopes.delete(:page)
-    result = klass.unscoped
-    scopes.each{|scope_name,value| result = result.send(scope_name, value) }
-    result.count
+    result = klass.all
+    scopes.each do |scope_name,value|
+      result = (value.respond_to?(:values)) ? result.send(scope_name,*value.values) : result.send(scope_name, value)
+    end
+    result.length
   end
 
 end
