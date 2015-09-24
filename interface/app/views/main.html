@@ -82,7 +82,7 @@
 <div class="row-fluid">
   <div class="col-xs-12 col-md-12">
     <div ng-if="hotels.length > 0" class="col-xs-12 col-md-12 text-center">
-      <h5 class="text-center">Exibindo página {{paginator.currentPage}} de {{paginator.numPages}}</h5>
+      <h5 class="text-center">Exibindo página {{paginator.currentPage}} de {{paginator.totalEntries}}</h5>
       <table class="table table-bordered">
         <thead>
         <th>Hotel</th>
@@ -95,7 +95,7 @@
         </tr>
         </tbody>
       </table>
-      <pagination total-items="paginator.totalItems" ng-model="paginator.currentPage" max-size="paginator.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="paginator.numPages">
+      <pagination total-items="paginator.totalEntries" ng-model="paginator.currentPage" max-size="paginator.perPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="paginator.totalEntries">
       </pagination>
     </div>
     <h3 ng-if="hotels.length == 0" class="text-center text-info">Nenhum hotel foi encontrado com esses critérios</h3>
