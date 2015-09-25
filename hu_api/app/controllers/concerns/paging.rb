@@ -1,4 +1,3 @@
-
 module Paging
   extend ActiveSupport::Concern
 
@@ -7,24 +6,21 @@ module Paging
     has_scope :per, default: 15
   end
 
-  def define_pagination_headers(klass)
+  def define_pagination_headers klass
     headers['X-Pagination-Per-Page'] = current_scopes[:per].to_i
     headers['X-Pagination-Current-Page'] = current_scopes[:page].to_i
-    headers['X-Pagination-Total-Pages'] = (total_items(klass).to_f/headers['X-Pagination-Per-Page']).ceil
-    headers['X-Pagination-Total-Entries'] = total_items(klass)
+    total_items = total_items(klass)
+    headers['X-Pagination-Total-Pages'] = (total_items.to_f/headers['X-Pagination-Per-Page']).ceil
+    headers['X-Pagination-Total-Entries'] = total_items
   end
 
   private
 
-  def total_items(klass)
-    scopes = current_scopes
-    scopes.delete(:per)
-    scopes.delete(:page)
-    result = klass.all
-    scopes.each do |scope_name,value|
-      result = (value.respond_to?(:values)) ? result.send(scope_name,*value.values) : result.send(scope_name, value)
-    end
-    result.length
+  def total_items klass
+    scopes_without_paging = current_scopes.reject{|k,v| k.in? [:per, :page]}
+    items = apply_scopes(klass, scopes_without_paging)
+    count = items.count
+    count.is_a?(Hash) ? count.length : count
   end
 
 end
