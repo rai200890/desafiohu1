@@ -15,6 +15,7 @@ gem 'activerecord-import'
 gem 'rake'
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'byebug'
   gem 'rspec-rails'
 end
