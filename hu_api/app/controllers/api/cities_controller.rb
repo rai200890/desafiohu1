@@ -6,7 +6,7 @@ module Api
     has_scope :by_city_name, allow_blank: false
 
     def index
-      define_pagination_headers(City)
+      @cities = apply_scopes City
       respond_with(@cities)
     end
 
