@@ -16,17 +16,25 @@ class HuApi < Thor
     run('bundle exec rake db:migrate', verbose: false)
   end
 
-  desc 'rebuild', 'Rebuild project from scratch loading seed'
-  def rebuild_with_seed
-    rebuild
+  desc 'build', 'Build project from scratch loading seed'
+  def build_with_seed
+    build
     args = []
     options = {
-    hotel_file: "../artefatos/hoteis.txt",
-    availability_file: "../artefatos/disp.txt"
+        hotel_file: "../artefatos/hoteis.txt",
+        availability_file: "../artefatos/disp.txt"
     }
     tasks = Db::Seed.new(args, options)
     tasks.invoke('db:seed:hotels')
     tasks.invoke('db:seed:availabilities')
   end
 
+  desc 'serve', 'Build project from scratch loading seed and running server'
+  def serve
+    build_with_seed
+    run('rails s Puma -d -p 3000', verbose: false)
+  end
+
 end
+
+
