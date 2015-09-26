@@ -34,6 +34,12 @@ A aplicação está divida em 2 partes:
 
 ### HU Api
 
+#### Instalação MySQL
+``` shell
+./install_dependencies
+```
+
+
 #### Criação e migração do banco de dados
 ``` shell
 rake db:create
