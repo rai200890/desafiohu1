@@ -32,6 +32,14 @@ A aplicação está divida em 2 partes:
 * No diretório *interface*:
   * Single Page Application usando AngularJS, que faz requisições a API.
 
+
+
+### Criação do banco de dados e execução do servidor rails(porta 3000) e do servidor estático(porta 9000)
+(A partir do diretório raiz do projeto)
+``` shell
+cd hu_api && thor hu_api:serve && cd ../interface && grunt serve​
+```
+
 ### Instalação das dependências adicionais do projeto
 
 ``` shell
