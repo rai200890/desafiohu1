@@ -20,3 +20,61 @@ Esses comandos tem que ser o suficiente para configurar meu mac os x OU ubuntu e
 
 ***Artefatos***
 * Imagens e database de hoteis e disponibilidades estão na pasta arquivos
+*
+
+# Minha solução
+
+##Visão Geral
+A aplicação está divida em 2 partes:
+
+* No diretório *hu_api*:
+  * API em Rails. 
+* No diretório *interface*:
+  * Single Page Application usando AngularJS, que faz requisições a API.
+
+
+
+### Criação do banco de dados e execução do servidor rails(porta 3000) e do servidor estático(porta 9000)
+(A partir do diretório raiz do projeto)
+``` shell
+cd hu_api && thor hu_api:serve && cd ../interface && grunt serve​
+```
+
+### Instalação das dependências adicionais do projeto
+
+``` shell
+./install_dependencies
+```
+
+### HU Api
+
+#### Criação e migração do banco de dados
+``` shell
+rake db:create
+rake db:migrate
+```
+
+#### Seed dos dados contidos no diretório *artefatos*:
+``` shell
+thor db:seed --hotel_file ../artefatos/hoteis.txt --availability_file ../artefatos/disp.txt
+```
+
+#### Execução dos testes unitários
+``` shell
+rake db:migrate RAILS_ENV=test
+rspec
+```
+
+#### Para executar o servidor
+```shell
+rails s Puma -p 3000
+```
+
+### Interface
+
+#### Para executar o servidor estático
+```shell
+grunt serve
+```
+
+
