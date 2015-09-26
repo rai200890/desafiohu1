@@ -32,13 +32,13 @@ A aplicação está divida em 2 partes:
 * No diretório *interface*:
   * Single Page Application usando AngularJS, que faz requisições a API.
 
-### HU Api
+### Instalação das dependências adicionais do projeto
 
-#### Instalação MySQL
 ``` shell
 ./install_dependencies
 ```
 
+### HU Api
 
 #### Criação e migração do banco de dados
 ``` shell
