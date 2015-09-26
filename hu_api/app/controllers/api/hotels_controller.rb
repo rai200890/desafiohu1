@@ -9,7 +9,7 @@ module Api
     has_scope :available_from_until, using: [:start_date, :end_date], type: :hash
 
     def index
-      @hotels = apply_scopes(Hotel)
+      @hotels = apply_scopes Hotel
       define_pagination_headers(Hotel)
       respond_with(@hotels)
     end
