@@ -5,14 +5,12 @@ class HuApi < Thor
 
   desc 'build', 'Build project from scratch'
   def build
-    run('bundle install', verbose: false)
     run('bundle exec rake db:create', verbose: false)
     run('bundle exec rake db:migrate', verbose: false)
   end
 
   desc 'rebuild', 'Rebuild project from scratch'
   def rebuild
-    run('bundle install', verbose: false)
     run('bundle exec rake db:drop', verbose: false)
     run('bundle exec rake db:create', verbose: false)
     run('bundle exec rake db:migrate', verbose: false)

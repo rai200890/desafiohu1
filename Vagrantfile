@@ -23,9 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network 'forwarded_port', guest: 3000, host: 3000
   config.vm.network 'forwarded_port', guest: 9000, host: 9000
 
-  config.vm.provision :shell, path: "install_mysql.sh"
-  config.vm.provision :shell, path: "install_nodejs.sh"
-  config.vm.provision :shell, path: "install_rvm.sh", privileged: false
+  config.vm.provision :shell, path: "./install_mysql.sh"
+  config.vm.provision :shell, path: "./install_nodejs.sh"
+  config.vm.provision :shell, path: "./install_rvm.sh", privileged: false
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
