@@ -12,6 +12,7 @@ gem 'has_scope'
 gem 'kaminari'
 gem 'responders'
 gem 'activerecord-import'
+gem 'rake'
 
 group :development, :test do
   gem 'byebug'

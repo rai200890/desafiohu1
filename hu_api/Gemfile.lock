@@ -171,6 +171,7 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.4)
   rails-api
+  rake
   responders
   rspec-rails
   rubocop
