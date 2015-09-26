@@ -29,7 +29,7 @@ class HuApi < Thor
     tasks.invoke('db:seed:availabilities')
   end
 
-  desc 'serve', 'Build project from scratch loading seed and running server'
+  desc 'serve', 'Build project from scratch loading seed and run server'
   def serve
     build_with_seed
     run('rails s Puma -d -p 3000', verbose: false)
