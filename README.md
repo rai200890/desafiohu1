@@ -37,7 +37,7 @@ A aplicação está divida em 2 partes:
 ### Criação do banco de dados e execução do servidor rails(porta 3000) e do servidor estático(porta 9000)
 (A partir do diretório raiz do projeto)
 ``` shell
-cd hu_api && thor hu_api:serve && cd ../interface && grunt serve​
+./serve_application
 ```
 
 ### Instalação das dependências adicionais do projeto
