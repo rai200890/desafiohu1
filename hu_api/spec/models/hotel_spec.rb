@@ -5,18 +5,18 @@ RSpec.describe Hotel, type: :model do
     let(:city_a){FactoryGirl.create(:city, :a)}
     context 'hotel with a name and a city' do
       let(:hotel_with_city){FactoryGirl.build(:hotel)}
-      it 'should be valid' do
+      it 'is valid' do
         expect(hotel_with_city).to be_valid
       end
     end
     context 'hotel without a name' do
-      it 'should be invalid' do
+      it 'is invalid' do
         expect(Hotel.new).to be_invalid
       end
     end
     context 'hotel without a city' do
       let(:hotel_without_city){FactoryGirl.build(:hotel, :without_city)}
-      it 'should be invalid' do
+      it 'is invalid' do
         expect(hotel_without_city).to be_invalid
       end
     end
@@ -25,13 +25,13 @@ RSpec.describe Hotel, type: :model do
       before :each do
         FactoryGirl.create(:hotel,name: "Hotel A", city: city_a)
       end
-      it 'should be invalid' do
+      it 'is invalid' do
         expect(second_hotel).to be_invalid
       end
     end
     context 'hotel with a name that already exists from a different city' do
       let(:second_hotel){FactoryGirl.build(:hotel, name: "Hotel B", city: city_a)}
-      it 'should be valid' do
+      it 'is valid' do
         expect(second_hotel).to be_valid
       end
     end
@@ -45,7 +45,7 @@ RSpec.describe Hotel, type: :model do
         before :each do
           hotel
         end
-        it 'should include hotels from that city' do
+        it 'includes hotels from that city' do
           expect(Hotel.by_city_or_hotel_name("CITY")).to include(hotel)
         end
       end
@@ -53,7 +53,7 @@ RSpec.describe Hotel, type: :model do
         before :each do
           hotel
         end
-        it 'should include hotels from that city' do
+        it 'includes hotels from that city' do
           expect(Hotel.by_city_or_hotel_name("CI")).to include(hotel)
         end
       end
@@ -61,7 +61,7 @@ RSpec.describe Hotel, type: :model do
         before :each do
           hotel
         end
-        it 'should include hotels from that city' do
+        it 'includes hotels from that city' do
           expect(Hotel.by_city_or_hotel_name("TY")).to include(hotel)
         end
       end
@@ -70,7 +70,7 @@ RSpec.describe Hotel, type: :model do
         before :each do
           hotel
         end
-        it 'should include that hotel' do
+        it 'includes that hotel' do
           expect(Hotel.by_city_or_hotel_name("HO")).to include(hotel)
         end
       end
@@ -79,7 +79,7 @@ RSpec.describe Hotel, type: :model do
         before :each do
           hotel
         end
-        it 'should include that hotel' do
+        it 'includes that hotel' do
           expect(Hotel.by_city_or_hotel_name("tel")).to include(hotel)
         end
       end
@@ -87,12 +87,16 @@ RSpec.describe Hotel, type: :model do
         before :each do
           hotel
         end
-        it 'should include hotels from that city' do
+        it 'includes hotels from that city' do
           expect(Hotel.by_city_or_hotel_name("City")).to include(hotel)
         end
       end
       context 'city name that doesn\'t exists' do
-        it 'should not include any hotel' do
+        before(:each) do
+          city = FactoryGirl.create(:city, name: 'Sidney')
+          FactoryGirl.create(:hotel, city: city)
+        end
+        it 'doesn\'t include any hotel' do
           expect(Hotel.by_city_or_hotel_name("Melbourne")).not_to include(hotel)
         end
         context 'hotel name that exists' do
@@ -100,12 +104,13 @@ RSpec.describe Hotel, type: :model do
           before :each do
             hotel
           end
-          it 'should include the hotel' do
+          it 'includes the hotel' do
             expect(Hotel.by_city_or_hotel_name("Hotel1")).to include(hotel)
           end
         end
         context 'hotel name that doesn\'t exists' do
-          it 'should not include that hotel' do
+          before(:each){FactoryGirl.create(:hotel)}
+          it 'doesn\'t include that hotel' do
             expect(Hotel.by_city_or_hotel_name("Hofdgfdg")).not_to include(hotel)
           end
         end
@@ -116,12 +121,12 @@ RSpec.describe Hotel, type: :model do
           before(:each) do
             FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
           end
-          it 'should return that hotel' do
+          it 'returns that hotel' do
             expect(Hotel.available_from('10/05/2015')).to include(hotel)
           end
         end
         context 'hotel with no availability' do
-          it 'should not include that hotel' do
+          it 'doesn\'t include that hotel' do
             expect(Hotel.available_from('10/05/2015')).not_to include(hotel)
           end
         end
@@ -129,7 +134,7 @@ RSpec.describe Hotel, type: :model do
           before(:each) do
             FactoryGirl.create(:availability, day: '10/05/2015' , hotel: hotel)
           end
-          it 'should return that hotel' do
+          it 'returns that hotel' do
             expect(Hotel.available_from('10/05/2015')).to include(hotel)
           end
         end
@@ -140,7 +145,7 @@ RSpec.describe Hotel, type: :model do
           before(:each) do
             FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
           end
-          it 'should return that hotel' do
+          it 'returns that hotel' do
             expect(Hotel.available_from('08/05/2015')).to include(hotel)
           end
         end
@@ -148,7 +153,7 @@ RSpec.describe Hotel, type: :model do
           before :each do
             hotel
           end
-          it 'should not include that hotel' do
+          it 'doesn\'t include that hotel' do
             expect(Hotel.available_until('08/04/2O15')).not_to include(hotel)
           end
         end
@@ -156,7 +161,7 @@ RSpec.describe Hotel, type: :model do
           before(:each) do
             FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
           end
-          it 'should return that hotel' do
+          it 'returns that hotel' do
             expect(Hotel.available_from('09/05/2015')).to include(hotel)
           end
         end
@@ -169,7 +174,7 @@ RSpec.describe Hotel, type: :model do
             FactoryGirl.create(:availability, day: '10/05/2015' , hotel: hotel)
             FactoryGirl.create(:availability, day: '11/05/2015' , hotel: hotel)
           end
-          it 'should return that hotel' do
+          it 'returns that hotel' do
             expect(Hotel.available_from_until('09/05/2015','11/05/2015')).to include(hotel)
           end
         end
@@ -178,7 +183,7 @@ RSpec.describe Hotel, type: :model do
             FactoryGirl.create(:availability, day: '09/05/2015' , hotel: hotel)
             FactoryGirl.create(:availability, day: '11/05/2015' , hotel: hotel)
           end
-          it 'should not include that hotel' do
+          it 'doesn\'t include that hotel' do
             expect(Hotel.available_from_until('09/05/2015','11/05/2015')).not_to include(hotel)
           end
         end
@@ -190,7 +195,7 @@ RSpec.describe Hotel, type: :model do
           FactoryGirl.create(:availability, day: '11/05/2015' , hotel: hotel)
           FactoryGirl.create(:availability, day: '12/05/2015' , hotel: hotel)
         end
-        it 'should return that hotel' do
+        it 'doesn\'t return that hotel' do
           expect(Hotel.available_from_until('09/05/2015','11/05/2015')).to include(hotel)
         end
       end
