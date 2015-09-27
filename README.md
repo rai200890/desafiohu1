@@ -33,7 +33,7 @@ A aplicação está divida em 2 partes:
   * Single Page Application usando AngularJS, que faz requisições a API.
 
 ### Instalação das dependências do projeto 
-
+(A partir do diretório raiz do projeto)
 ``` shell
 sh install_dependencies.sh
 ```
