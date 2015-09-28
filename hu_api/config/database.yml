@@ -3,16 +3,16 @@ development:
   pool: 5
   timeout: 5000
   database: hu_api_development
-  username: root
-  password:
+  username: <%= ENV['MYSQL_ROOT_USERNAME'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
 
 test:
   adapter: mysql2
   pool: 5
   timeout: 5000
   database: hu_api_test
-  username: root
-  password:
+  username: <%= ENV['MYSQL_ROOT_USERNAME'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
 
 production:
   adapter: mysql2
