@@ -21,6 +21,7 @@ Esses comandos tem que ser o suficiente para configurar meu mac os x OU ubuntu e
 ***Artefatos***
 * Imagens e database de hoteis e disponibilidades estão na pasta arquivos
 *
+___
 
 # Minha solução
 
@@ -44,6 +45,7 @@ sh install_dependencies.sh
 ``` shell
 sh serve_application.sh
 ```
+___
 
 ### HU Api
 
