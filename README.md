@@ -32,18 +32,14 @@ A aplicação está divida em 2 partes:
 * No diretório *interface*:
   * Single Page Application usando AngularJS, que faz requisições a API.
 
-### Instalação MySQL
-``` shell
-sh install_mysql.sh
-```
-
-### Instalação das dependências do projeto
-
+### Instalação das dependências do projeto 
+(A partir do diretório raiz do projeto)
 ``` shell
 sh install_dependencies.sh
 ```
 
-### Criação do banco de dados e execução do servidor rails(porta 3000) e do servidor estático(porta 9000)
+### Execução da Aplicação
+#### Criação do banco de dados, seed com os artefatos e  execução do servidor rails(porta 3000) e do servidor estático(porta 9000)
 (A partir do diretório raiz do projeto)
 ``` shell
 sh serve_application.sh
