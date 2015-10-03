@@ -17,7 +17,7 @@ class HuApi < Thor
     run('bundle exec rake db:migrate', verbose: false)
   end
 
-  desc 'build', 'Build project from scratch loading seed'
+  desc 'build with seed', 'Build project from scratch loading seed'
   def build_with_seed
     build
     args = []
