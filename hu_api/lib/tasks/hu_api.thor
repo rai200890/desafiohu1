@@ -1,4 +1,5 @@
-require "#{Dir.pwd}/lib/tasks/db/seed.rb"
+require 'thor/rails'
+require_relative "db/seed.rb"
 class HuApi < Thor
   include Thor::Actions
   include Thor::Rails
