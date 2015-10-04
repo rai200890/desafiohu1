@@ -66,16 +66,31 @@ rake db:migrate RAILS_ENV=test
 rspec
 ```
 
-#### Para executar o servidor
+#### Para executar o servidor Rails
 ```shell
 rails s Puma -p 3000
 ```
 
 ### Interface
 
+#### Para instalar as dependências do NodeJS
+
+```shell
+npm install
+```
+
+É necessário que grunt, grunt-cli e bower estejam instalados globalmente
+
+```shell
+npm install -g grunt grunt-cli bower
+```
+
+#### Para instalar as dependências css e js
+```shell
+bower install
+```
+
 #### Para executar o servidor estático
 ```shell
 grunt serve
 ```
-
-

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 #MySQL Installation
 export MYSQL_ROOT_USERNAME=root
